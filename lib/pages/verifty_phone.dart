@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/pages/Dashboard.dart';
-import 'package:flutter_ecommerce/pages/phoneAuth/numeric_pad.dart';
+import 'package:flutter_ecommerce/pages/numeric_pad.dart';
 import 'package:page_transition/page_transition.dart';
 
 class VerifyPhone extends StatefulWidget {

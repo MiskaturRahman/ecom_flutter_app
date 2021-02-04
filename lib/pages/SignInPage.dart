@@ -1,7 +1,7 @@
-import 'package:dokandar_app/screens/login/phoneAuth/numeric_pad.dart';
-import 'package:dokandar_app/screens/login/phoneAuth/verifty_phone.dart';
-import 'package:dokandar_app/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/pages/numeric_pad.dart';
+import 'package:flutter_ecommerce/pages/verifty_phone.dart';
+import 'package:flutter_ecommerce/pages/welcome_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignInPage extends StatefulWidget {

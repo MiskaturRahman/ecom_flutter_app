@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/pages/SignInPage.dart';
+import 'package:flutter_ecommerce/pages/register_page.dart';
 import 'package:flutter_ecommerce/shared/color.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -38,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                       context,
                       PageTransition(
                           type: PageTransitionType.rightToLeft,
-                          child: SignInPage()));
+                          child: RegisterPage()));
                 },
                 color: primaryColor,
                 padding: EdgeInsets.all(13),

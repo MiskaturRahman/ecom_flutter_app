@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/pages/welcome_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -96,7 +98,22 @@ class RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Register')),
+        appBar: AppBar(
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        child: WelcomeScreen()));
+              },
+              child: Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: Colors.black,
+              ),
+            ),
+            title: Text('Register')),
         body: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Center(
