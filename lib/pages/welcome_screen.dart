@@ -51,11 +51,3 @@ class WelcomeScreen extends StatelessWidget {
     ));
   }
 }
-// dokanFlatBtn('Welcome', () {
-//                 Navigator.push(
-//                     context,
-//                     PageTransition(
-//                         type: PageTransitionType.leftToRight,
-//                         child: SignInPage()));
-//               }
-//               ),

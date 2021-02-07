@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/pages/Dashboard.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,8 +21,8 @@ class LoginPageState extends State<LoginPage> {
     return Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: TextFormField(
-            onSaved: (val) => _email = val,
-            validator: (val) => !val.contains('@') ? 'Invalid Email' : null,
+            // onSaved: (val) => _email = val,
+            // validator: (val) => !val.contains('@') ? 'Invalid Email' : null,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Email',
@@ -32,8 +34,8 @@ class LoginPageState extends State<LoginPage> {
     return Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: TextFormField(
-            onSaved: (val) => _password = val,
-            validator: (val) => val.length < 6 ? 'Username too short' : null,
+            // onSaved: (val) => _password = val,
+            // validator: (val) => val.length < 6 ? 'Username too short' : null,
             obscureText: _obscureText,
             decoration: InputDecoration(
                 suffixIcon: GestureDetector(
@@ -72,12 +74,16 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void _submit() {
-    final form = _formKey.currentState;
+    // final form = _formKey.currentState;
+    Navigator.pushReplacement(
+        context,
+        PageTransition(
+            type: PageTransitionType.leftToRight, child: Dashboard()));
 
-    if (form.validate()) {
-      form.save();
-      print('Email: $_email, Password: $_password');
-    }
+    // if (form.validate()) {
+    //   form.save();
+    //   print('Email: $_email, Password: $_password');
+    // }
   }
 
   @override
