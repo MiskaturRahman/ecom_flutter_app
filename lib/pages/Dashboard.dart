@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/pages/welcome_screen.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/dokandar_icons.dart';
 import './ProductPage.dart';
 import '../shared/Product.dart';
 import '../shared/partials.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Dashboard extends StatefulWidget {
   final String pageTitle;
@@ -33,11 +35,6 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          leading: IconButton(
-            onPressed: () {},
-            iconSize: 21,
-            icon: Icon(Dokandar.funnel),
-          ),
           backgroundColor: primaryColor,
           title: Text('দোকানদার',
               style: logoWhiteStyle, textAlign: TextAlign.center),

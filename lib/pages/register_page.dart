@@ -48,7 +48,7 @@ class RegisterPageState extends State<RegisterPage> {
     return Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: TextFormField(
-            // onSaved: (val) => _password = val,
+            onSaved: (val) => _password = val,
             // validator: (val) => val.length < 6 ? 'Username too short' : null,
             obscureText: _obscureText,
             decoration: InputDecoration(
@@ -88,16 +88,16 @@ class RegisterPageState extends State<RegisterPage> {
   }
 
   void _submit() {
-    // final form = _formKey.currentState;
+    final form = _formKey.currentState;
     Navigator.pushReplacement(
         context,
         PageTransition(
             type: PageTransitionType.leftToRight, child: Dashboard()));
 
-    // if (form.validate()) {
-    //   form.save();
-    //   print('Username: $_username, Email: $_email, Password: $_password');
-    // }
+    if (form.validate()) {
+      form.save();
+      print('Username: $_username, Email: $_email, Password: $_password');
+    }
   }
 
   @override
