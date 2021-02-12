@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/pages/Dashboard.dart';
-import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -75,10 +73,6 @@ class LoginPageState extends State<LoginPage> {
 
   void _submit() {
     final form = _formKey.currentState;
-    Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.leftToRight, child: Dashboard()));
 
     if (form.validate()) {
       form.save();

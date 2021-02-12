@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/pages/Dashboard.dart';
-import 'package:flutter_ecommerce/pages/welcome_screen.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -9,9 +8,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
-  bool _obscureText = true;
+  bool _isSubmitting, _obscureText = true;
   String _username, _email, _password;
 
   Widget _showTitle() {
@@ -69,17 +69,21 @@ class RegisterPageState extends State<RegisterPage> {
     return Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: Column(children: [
-          RaisedButton(
-              child: Text('Submit',
-                  style: Theme.of(context)
-                      .textTheme
-                      .body1
-                      .copyWith(color: Colors.black)),
-              elevation: 8.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              color: Theme.of(context).primaryColor,
-              onPressed: _submit),
+          _isSubmitting == true
+              ? CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation(Theme.of(context).primaryColor))
+              : RaisedButton(
+                  child: Text('Submit',
+                      style: Theme.of(context)
+                          .textTheme
+                          .body1
+                          .copyWith(color: Colors.black)),
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: _submit),
           FlatButton(
               child: Text('Existing user? Login'),
               onPressed: () =>
@@ -89,36 +93,43 @@ class RegisterPageState extends State<RegisterPage> {
 
   void _submit() {
     final form = _formKey.currentState;
-    Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.leftToRight, child: Dashboard()));
 
     if (form.validate()) {
       form.save();
-      print('Username: $_username, Email: $_email, Password: $_password');
+      _registerUser();
     }
+  }
+
+  void _registerUser() async {
+    setState(() => _isSubmitting = true);
+    http.Response response = await http.post('http://localhost:1337/auth/local',
+        body: {"username": _username, "email": _email, "password": _password});
+    final responseData = json.decode(response.body);
+    setState(() => _isSubmitting = false);
+    _showSuccessSnack();
+    _redirectUser();
+    print(responseData);
+  }
+
+  void _showSuccessSnack() {
+    final snackBar = SnackBar(
+        content: Text('User $_username successfully created!',
+            style: TextStyle(color: Colors.blue)));
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+    _formKey.currentState.reset();
+  }
+
+  void _redirectUser() {
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, '/products');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.leftToRight,
-                        child: WelcomeScreen()));
-              },
-              child: Icon(
-                Icons.arrow_back,
-                size: 30,
-                color: Colors.black,
-              ),
-            ),
-            title: Text('Register')),
+        key: _scaffoldKey,
+        appBar: AppBar(title: Text('Register')),
         body: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Center(

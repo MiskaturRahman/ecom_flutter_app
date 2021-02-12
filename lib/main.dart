@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/pages/Dashboard.dart';
 import 'package:flutter_ecommerce/pages/login_page.dart';
 import 'package:flutter_ecommerce/pages/register_page.dart';
 import 'package:flutter_ecommerce/pages/welcome_screen.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter E-Commerce',
         routes: {
+          '/products': (BuildContext context) => Dashboard(),
           '/login': (BuildContext context) => LoginPage(),
           '/register': (BuildContext context) => RegisterPage()
         },
