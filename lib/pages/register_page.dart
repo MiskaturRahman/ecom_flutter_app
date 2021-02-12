@@ -35,8 +35,8 @@ class RegisterPageState extends State<RegisterPage> {
     return Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: TextFormField(
-            // onSaved: (val) => _email = val,
-            // validator: (val) => !val.contains('@') ? 'Invalid Email' : null,
+            onSaved: (val) => _email = val,
+            validator: (val) => !val.contains('@') ? 'Invalid Email' : null,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Email',
@@ -49,7 +49,7 @@ class RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.only(top: 20.0),
         child: TextFormField(
             onSaved: (val) => _password = val,
-            // validator: (val) => val.length < 6 ? 'Username too short' : null,
+            validator: (val) => val.length < 6 ? 'Username too short' : null,
             obscureText: _obscureText,
             decoration: InputDecoration(
                 suffixIcon: GestureDetector(
